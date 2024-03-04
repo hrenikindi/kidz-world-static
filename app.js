@@ -123,6 +123,7 @@ function updatePrice() {
 
 cartBtn.onclick = () => {
   updatePrice();
+  sendWhatsapp();
  
   for (let j = 0; j < items.length; j++) {
     if (items[j].quantity != 0) {
@@ -139,5 +140,21 @@ cartBtn.onclick = () => {
     "The total amount is " + finalDollars + "$ and " + finalCents + " cents"
   );
 };
+
+var whatsappLink =
+  "https://api.whatsapp.com/send?phone=+919390048916&text=Order%20details";
+
+function  sendWhatsapp() {
+for (let index = 0; index < items.length; index++) {
+    if (items[index].quantity != 0) {
+      whatsappLink += "%0A" + items[index].name + "%20" + items[index].quantity;
+    }
+  }
+  whatsappLink +=
+    "%0A" + "Total%20Price:%20$" + finalDollars + "%20" + finalCents + "c";
+    window.open(whatsappLink,'_blank');
+}
+
+
 
 
